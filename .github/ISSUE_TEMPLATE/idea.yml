@@ -1,0 +1,11 @@
+name: Idea
+description: Something the site or the panel should show or do.
+labels: [idea]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: The idea
+      description: What it is, and where it would go. A sketch or reference helps.
+    validations:
+      required: true

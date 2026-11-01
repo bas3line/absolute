@@ -1,0 +1,41 @@
+{
+  "name": "absolute",
+  "version": "0.1.0",
+  "private": true,
+  "description": "The landing page and control panel for absolute, anonymous servers. Next.js, Tailwind and SVG drawn in code, with a working demo panel that runs in the browser.",
+  "license": "MIT",
+  "author": "bas3line (https://github.com/bas3line)",
+  "homepage": "https://absolute.kiraa-7e4.workers.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bas3line/absolute.git"
+  },
+  "engines": {
+    "node": ">=20.9"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint",
+    "check": "npm run typecheck && npm run lint && next build",
+    "preview": "npm run build && wrangler dev",
+    "deploy": "npm run build && wrangler deploy"
+  },
+  "dependencies": {
+    "next": "16.4.3",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/turbopack": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.3",
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "wrangler": "^4.156.0"
+  }
+}
