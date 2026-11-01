@@ -1,0 +1,227 @@
+@import "tailwindcss";
+
+/*
+ * absolute's palette: warm-grey paper, slate ink, a slate
+ * "night" for the dark bands, mint for the call to action, lime for the one
+ * highlight, and pink / periwinkle for line art and pixel marks. Drawn, never
+ * photographed: no dither, no prints.
+ */
+:root {
+  --bg: #e9e9e9;
+  /* Raised surfaces (windows, cards) sit lighter than the paper. */
+  --paper: #f5f5f4;
+  --bg-2: #e1e1e4;
+  --bg-3: #d8d8dd;
+  --ink: #3d3b4f;
+  --ink-2: #4c4a5e;
+  /* 5.2:1 on --bg, so it carries small labels. */
+  --ink-3: #5f5d72;
+  --ink-4: #b4b3bd;
+  --line: #d3d3d8;
+  --line-2: #bfbec8;
+
+  /* Night: the slate bands. Text on night is mint-pale or white. */
+  --night: #3d3b4f;
+  --night-2: #47455b;
+  --night-3: #524f68;
+  --night-line: #615e78;
+
+  --mint: #28e99f;
+  --mint-hi: #1fd690;
+  --mint-pale: #c6f9dc;
+  --lime: #ecffa3;
+  --lime-hi: #e2ff78;
+  --pink: #f5a8ef;
+  --pink-soft: #fbd6f7;
+  --peri: #7b8cff;
+  --peri-soft: #b9c3ff;
+
+  /* Legacy names, remapped so the dashboard follows the palette.
+     --accent is the deep mint that still reads as text on paper (4.9:1). */
+  --accent: #097348;
+  --accent-deep: #075c3a;
+  --accent-soft: #d3f7e4;
+  --accent-mid: #8eeec4;
+  --accent-line: #a8e9c9;
+  --tint: #dff5e9;
+  --marker: var(--mint);
+  --marker-hi: var(--mint-hi);
+
+  --brand-900: var(--night);
+  --brand-800: var(--night-2);
+  --brand-600: var(--night-3);
+  --brand-300: var(--mint-pale);
+}
+
+@theme inline {
+  --font-sans: var(--font-rethink), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bricolage), var(--font-rethink), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-dot: var(--font-doto), ui-monospace, monospace;
+
+  --color-bg: var(--bg);
+  --color-paper: var(--paper);
+  --color-bg-2: var(--bg-2);
+  --color-bg-3: var(--bg-3);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-ink-4: var(--ink-4);
+  --color-line: var(--line);
+  --color-line-2: var(--line-2);
+
+  --color-night: var(--night);
+  --color-night-2: var(--night-2);
+  --color-night-3: var(--night-3);
+  --color-night-line: var(--night-line);
+  --color-mint: var(--mint);
+  --color-mint-hi: var(--mint-hi);
+  --color-mint-pale: var(--mint-pale);
+  --color-lime: var(--lime);
+  --color-lime-hi: var(--lime-hi);
+  --color-pink: var(--pink);
+  --color-pink-soft: var(--pink-soft);
+  --color-peri: var(--peri);
+  --color-peri-soft: var(--peri-soft);
+
+  --color-accent: var(--accent);
+  --color-accent-deep: var(--accent-deep);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-mid: var(--accent-mid);
+  --color-accent-line: var(--accent-line);
+  --color-tint: var(--tint);
+  --color-marker: var(--marker);
+  --color-marker-hi: var(--marker-hi);
+  --color-brand-900: var(--brand-900);
+  --color-brand-800: var(--brand-800);
+  --color-brand-600: var(--brand-600);
+  --color-brand-300: var(--brand-300);
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    scroll-behavior: smooth;
+    background: var(--bg);
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--lime);
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+  }
+
+  .font-mono {
+    font-variant-ligatures: none;
+  }
+}
+
+@layer utilities {
+  .pixelated {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+
+  /* Fine 1px grid used behind panels. */
+  .bg-grid {
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  /* Dot lattice for paper areas. currentColor-free so it works on night too via --dot. */
+  .bg-dots {
+    background-image: radial-gradient(var(--dot, var(--line-2)) 1px, transparent 1.2px);
+    background-size: 16px 16px;
+  }
+
+  /* Diagonal hatch, for frames and empty rack slots. */
+  .bg-hatch {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      var(--hatch, var(--line-2)) 0 1px,
+      transparent 1px 7px
+    );
+  }
+
+  /* A cut top-right corner: the shape of every button and tag. */
+  .notch {
+    clip-path: polygon(0 0, calc(100% - var(--notch, 10px)) 0, 100% var(--notch, 10px), 100% 100%, 0 100%);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
+
+@keyframes caret {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-caret {
+  animation: caret 1.05s steps(1) infinite;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 700ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal[data-shown="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .animate-caret {
+    animation: none;
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "absolute",
+  "compatibility_date": "2026-10-19",
+  "observability": {
+    "enabled": true
+  },
+  // `next build` exports every page as HTML into out/; the Worker only serves those files.
+  "assets": {
+    "directory": "./out",
+    "not_found_handling": "404-page"
+  }
+}

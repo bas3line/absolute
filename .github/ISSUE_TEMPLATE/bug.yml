@@ -1,0 +1,27 @@
+name: Bug
+description: Something on the site or in the panel looks or behaves wrong.
+labels: [bug]
+body:
+  - type: input
+    id: where
+    attributes:
+      label: Where
+      description: The page, section or panel view.
+      placeholder: the Regions map, the panel's Deploy page, a server's console
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what you saw. A screenshot helps.
+    validations:
+      required: true
+  - type: input
+    id: setup
+    attributes:
+      label: Setup
+      description: Browser and version, system, and the window size.
+      placeholder: Safari 19, macOS 27, 1440 x 900
+    validations:
+      required: true
