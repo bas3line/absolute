@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import type { ReactNode } from "react";
 import { Bricolage_Grotesque, Doto, IBM_Plex_Mono, Rethink_Sans } from "next/font/google";
 import "./globals.css";
 
@@ -43,7 +44,8 @@ export const viewport: Viewport = {
   themeColor: "#e9e9e9",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+// Typed by hand: LayoutProps only exists once `next build` has generated its types, and CI typechecks first.
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
